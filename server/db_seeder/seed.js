@@ -21,11 +21,6 @@ const jsonFilePathReviews = "./db_seeder/json_files/reviews.json";
 const jsonDataReviews = fs.readFileSync(jsonFilePathReviews, "utf8");
 const reviews = JSON.parse(jsonDataReviews);
 
-// mongoose.connect(process.env.MONGODB_URL, {
-//    useNewUrlParser: true,
-//    useUnifiedTopology: true,
-// });
-
 async function deleteExistingClubs() {
    try {
       await Club.deleteMany({});
@@ -176,7 +171,7 @@ async function generateDummyUsers(totalUserNumber) {
    }
 }
 
-async function generateReviews() {
+async function generateReviews(tempUsers, tempClubs, tempActivities) {
    for (const user of tempUsers) {
       for (const club of tempClubs) {
          // Generate and save reviews for clubs
@@ -192,7 +187,7 @@ async function generateReviews() {
             const newReview = await review.save();
 
             // Update user and club with the new review
-            await UserV3.findByIdAndUpdate(
+            await User.findByIdAndUpdate(
                user._id,
                { $push: { reviews: newReview._id } },
                { new: true }
@@ -223,7 +218,7 @@ async function generateReviews() {
             const newReview = await review.save();
 
             // Update user and club with the new review
-            await UserV3.findByIdAndUpdate(
+            await User.findByIdAndUpdate(
                user._id,
                { $push: { reviews: newReview._id } },
                { new: true }
@@ -243,23 +238,23 @@ async function generateReviews() {
    }
 }
 
-// const tempUsers = await User.find();
-// const tempClubs = await Club.find();
-// const tempActivities = await Activity.find();
-
 async function populateData() {
    await connectDB();
    const startTime = Date.now();
    console.log("Seeding the database...");
    //  await deleteExistingClubs();
    //  await deleteExistingActivities();
-   await deleteExistingUsers();
+   //  await deleteExistingUsers();
    await deleteExistingReviews();
 
-   //  await generateDummyClubs(clubs);
-   await generateDummyUsers(10);
+   const tempUsers = await User.find();
+   const tempClubs = await Club.find();
+   const tempActivities = await Activity.find();
 
-   //  await generateReviews();
+   //  await generateDummyClubs(clubs);
+   //  await generateDummyUsers(10);
+
+   await generateReviews(tempUsers, tempClubs, tempActivities);
 
    await mongoose.connection.close();
    console.log("Seeding done successfully!");
@@ -270,202 +265,3 @@ async function populateData() {
 }
 
 populateData();
-
-// async function generateReviews() {
-//   for (const user of tempUsers) {
-//     let newReview;
-//     console.log("Generating reviews for user:", user.firstName);
-//     for (const club of tempClubs) {
-//       try {
-//         const review = new Review({
-//           clubOrActivityId: club._id,
-//           onModel: "Club",
-//           userId: user._id,
-//           content: reviews[Math.floor(Math.random() * reviews.length) + 1],
-//           rating: Math.floor(Math.random() * 5) + 1,
-//         });
-//         newReview = await review.save();
-//         // console.log("newReview._id ", newReview._id);
-//       } catch (error) {
-//         console.error("Error creating reviews:", error);
-//       }
-
-//       try {
-//         const updatedUser = await UserV3.findByIdAndUpdate(
-//           user._id,
-//           { $push: { reviews: newReview._id } },
-//           { new: true }
-//         );
-
-//         if (!updatedUser) {
-//           console.error("User not found!");
-//         } else {
-//           console.log("User updated with new review.");
-//         }
-//       } catch (err) {
-//         console.error("Error updating user:", err);
-//       }
-//       try {
-//         const updatedClub = await Club.findByIdAndUpdate(
-//           club._id,
-//           { $push: { reviews: newReview._id } },
-//           { new: true }
-//         );
-
-//         if (!updatedClub) {
-//           console.error("Club not found!");
-//         } else {
-//           console.log("Club updated with new review.");
-//         }
-//       } catch (err) {
-//         console.error("Error updating club:", err);
-//       }
-//     }
-
-//     for (const activity of tempActivities) {
-//       try {
-//         const review = new Review({
-//           clubOrActivityId: activity._id,
-//           onModel: "Activity",
-//           userId: user._id,
-//           content: reviews[Math.floor(Math.random() * reviews.length) + 1],
-//           rating: Math.floor(Math.random() * 5) + 1,
-//         });
-//         newReview = await review.save();
-//         // console.log("newReview._id ", newReview._id);
-//       } catch (error) {
-//         console.error("Error creating dummy users:", error);
-//       }
-
-//       try {
-//         const updatedUser = await UserV3.findByIdAndUpdate(
-//           user._id,
-//           { $push: { reviews: newReview._id } },
-//           { new: true }
-//         );
-
-//         if (!updatedUser) {
-//           console.error("User not found!");
-//         } else {
-//           console.log("User updated with new review.");
-//         }
-//       } catch (err) {
-//         console.error("Error updating user:", err);
-//       }
-//       try {
-//         const updatedActivity = await Activity.findByIdAndUpdate(
-//           activity._id,
-//           { $push: { reviews: newReview._id } },
-//           { new: true }
-//         );
-
-//         if (!updatedActivity) {
-//           console.error("Activity not found!");
-//         } else {
-//           console.log("Activity updated with new review.");
-//         }
-//       } catch (err) {
-//         console.error("Error updating activity:", err);
-//       }
-//     }
-//   }
-// }
-
-// async function generateDummyClubs2(clubData) {
-//   try {
-//     const batchSize = 5; // Number of clubs to process in each batch
-//     for (let i = 0; i < clubData.length; i += batchSize) {
-//       const batch = clubData.slice(i, i + batchSize);
-//       const clubPromises = batch.map(async (clubItem) => {
-//         const club = new Club(clubItem);
-//         const result = await club.save();
-//         const activityIdList = await generateActivities(result);
-//         const photoList = await generateRandomPhotoUriList(result.category, 20);
-//         await Club.updateOne(
-//           { _id: result._id },
-//           { $push: { activities: activityIdList, uriPhotos: photoList } }
-//         );
-//       });
-//       await Promise.all(clubPromises);
-//     }
-//     console.log("Dummy clubs created successfully!");
-//   } catch (error) {
-//     console.error("Error creating dummy clubs:", error);
-//   }
-// }
-
-// async function generateReviews2() {
-//   const userPromises = tempUsers.map(async (user) => {
-//     let newReview;
-
-//     for (const club of tempClubs) {
-//       // Generate and save reviews for clubs
-//       console.log("Generating reviews for club:", club.name);
-//       try {
-//         const review = new Review({
-//           clubOrActivityId: club._id,
-//           onModel: "Club",
-//           userId: user._id,
-//           content: reviews[Math.floor(Math.random() * reviews.length) + 1],
-//           rating: Math.floor(Math.random() * 5) + 1,
-//         });
-//         newReview = await review.save();
-//       } catch (error) {
-//         console.error("Error creating club review:", error);
-//       }
-
-//       // Update user and club with the new review
-//       try {
-//         await UserV3.findByIdAndUpdate(
-//           user._id,
-//           { $push: { reviews: newReview._id } },
-//           { new: true }
-//         );
-
-//         await Club.findByIdAndUpdate(
-//           club._id,
-//           { $push: { reviews: newReview._id } },
-//           { new: true }
-//         );
-//       } catch (err) {
-//         console.error("Error updating user or club:", err);
-//       }
-//     }
-
-//     for (const activity of tempActivities) {
-//       // Generate and save reviews for activities
-//       console.log("Generating reviews for activity:", activity.name);
-
-//       try {
-//         const review = new Review({
-//           clubOrActivityId: activity._id,
-//           onModel: "Activity",
-//           userId: user._id,
-//           content: reviews[Math.floor(Math.random() * reviews.length) + 1],
-//           rating: Math.floor(Math.random() * 5) + 1,
-//         });
-//         newReview = await review.save();
-//       } catch (error) {
-//         console.error("Error creating activity review:", error);
-//       }
-
-//       // Update user and activity with the new review
-//       try {
-//         await UserV3.findByIdAndUpdate(
-//           user._id,
-//           { $push: { reviews: newReview._id } },
-//           { new: true }
-//         );
-//         await Activity.findByIdAndUpdate(
-//           activity._id,
-//           { $push: { reviews: newReview._id } },
-//           { new: true }
-//         );
-//       } catch (err) {
-//         console.error("Error updating user or activity:", err);
-//       }
-//     }
-//   });
-
-//   await Promise.all(userPromises);
-// }
