@@ -1,8 +1,9 @@
 import express from "express";
-import { getClubs } from "../controllers/club.js";
+import { getClubs, getClub } from "../controllers/club.js";
 
 const router = express.Router();
 
 router.get("/", getClubs);
+router.get("/:id", getClub);
 
 export default router;
