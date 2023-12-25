@@ -247,13 +247,12 @@ async function populateData() {
    //  await deleteExistingUsers();
    await deleteExistingReviews();
 
-   const tempUsers = await User.find();
-   const tempClubs = await Club.find();
-   const tempActivities = await Activity.find();
-
    //  await generateDummyClubs(clubs);
    //  await generateDummyUsers(10);
 
+   const tempUsers = await User.find();
+   const tempClubs = await Club.find();
+   const tempActivities = await Activity.find();
    await generateReviews(tempUsers, tempClubs, tempActivities);
 
    await mongoose.connection.close();
