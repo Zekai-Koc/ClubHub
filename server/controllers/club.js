@@ -24,3 +24,17 @@ export const getClub = async (req, res) => {
       res.status(404).json({ message: error.message });
    }
 };
+
+export const createClub = async (req, res) => {
+   const club = req.body;
+
+   const newClub = new Club(club);
+
+   try {
+      await newClub.save();
+
+      res.status(201).json(newClub);
+   } catch (error) {
+      res.status(409).json({ message: error.message });
+   }
+};
