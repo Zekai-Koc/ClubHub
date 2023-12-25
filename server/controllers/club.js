@@ -52,3 +52,14 @@ export const updateClub = async (req, res) => {
 
    res.json(updatedClub);
 };
+
+export const deleteClub = async (req, res) => {
+   const { id } = req.params;
+
+   if (!mongoose.Types.ObjectId.isValid(id))
+      return res.status(404).send("No club with that id");
+
+   await Club.findByIdAndRemove(id);
+
+   res.json({ message: "Club deleted successfully." });
+};
