@@ -38,3 +38,17 @@ export const createClub = async (req, res) => {
       res.status(409).json({ message: error.message });
    }
 };
+
+export const updateClub = async (req, res) => {
+   const { id: _id } = req.params;
+   const club = req.body;
+
+   if (!mongoose.Types.ObjectId.isValid(_id))
+      return res.status(404).send("No club with that id");
+
+   const updatedClub = await Club.findByIdAndUpdate(_id, club, {
+      new: true,
+   });
+
+   res.json(updatedClub);
+};
