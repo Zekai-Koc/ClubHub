@@ -12,3 +12,15 @@ export const getActivities = async (req, res) => {
       res.status(404).json({ message: error.message });
    }
 };
+
+export const getActivity = async (req, res) => {
+   try {
+      const activity = await Activity.findById(req.params.id);
+      res.status(200).json({
+         status: "success",
+         activity,
+      });
+   } catch (error) {
+      res.status(404).json({ message: error.message });
+   }
+};
