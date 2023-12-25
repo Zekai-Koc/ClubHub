@@ -64,3 +64,15 @@ export const deleteUser = async (req, res) => {
 
    res.json({ message: "User deleted successfully." });
 };
+
+export const getTotalUsersNum = async (req, res) => {
+   try {
+      const totalUsers = await User.countDocuments();
+      res.status(200).json({
+         status: "success",
+         totalUsers,
+      });
+   } catch (error) {
+      res.status(404).json({ message: error.message });
+   }
+};
