@@ -52,3 +52,14 @@ export const updateActivity = async (req, res) => {
 
    res.json(updatedActivity);
 };
+
+export const deleteActivity = async (req, res) => {
+   const { id } = req.params;
+
+   if (!mongoose.Types.ObjectId.isValid(id))
+      return res.status(404).send("No activity with that id");
+
+   await Activity.findByIdAndRemove(id);
+
+   res.json({ message: "Activity deleted successfully" });
+};
