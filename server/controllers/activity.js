@@ -5,7 +5,7 @@ export const getActivities = async (req, res) => {
       const activities = await Activity.find();
       res.status(200).json({
          status: "success",
-         results: users.length,
+         results: activities.length,
          activities,
       });
    } catch (error) {

@@ -5,7 +5,7 @@ export const getClubs = async (req, res) => {
       const clubs = await Club.find();
       res.status(200).json({
          status: "success",
-         results: users.length,
+         results: clubs.length,
          clubs,
       });
    } catch (error) {
