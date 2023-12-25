@@ -24,3 +24,17 @@ export const getActivity = async (req, res) => {
       res.status(404).json({ message: error.message });
    }
 };
+
+export const createActivity = async (req, res) => {
+   const activity = req.body;
+
+   const newActivity = new Activity(activity);
+
+   try {
+      await newActivity.save();
+
+      res.status(201).json(newActivity);
+   } catch (error) {
+      res.status(409).json({ message: error.message });
+   }
+};
