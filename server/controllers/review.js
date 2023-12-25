@@ -52,3 +52,14 @@ export const updateReview = async (req, res) => {
 
    res.json(updatedReview);
 };
+
+export const deleteReview = async (req, res) => {
+   const { id } = req.params;
+
+   if (!mongoose.Types.ObjectId.isValid(id))
+      return res.status(404).send("No review with that id");
+
+   await Review.findByIdAndRemove(id);
+
+   res.json({ message: "Review deleted successfully." });
+};
