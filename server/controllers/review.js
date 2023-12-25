@@ -38,3 +38,17 @@ export const createReview = async (req, res) => {
       res.status(409).json({ message: error.message });
    }
 };
+
+export const updateReview = async (req, res) => {
+   const { id: _id } = req.params;
+   const review = req.body;
+
+   if (!mongoose.Types.ObjectId.isValid(_id))
+      return res.status(404).send("No review with that id");
+
+   const updatedReview = await Review.findByIdAndUpdate(_id, review, {
+      new: true,
+   });
+
+   res.json(updatedReview);
+};
