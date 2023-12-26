@@ -4,8 +4,10 @@ import club from "./routes/club.js";
 import activity from "./routes/activity.js";
 import review from "./routes/review.js";
 import user from "./routes/user.js";
+import cors from "cors";
 
 const app = express();
+app.use(cors());
 
 app.use(morgan("dev"));
 
