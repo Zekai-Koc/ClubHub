@@ -40,16 +40,16 @@ const Simple = ({ dataArray }) => {
    console.log(dataArray);
    return (
       <Carousel partialVisible itemClass="image-item" responsive={responsive}>
-         {images.map((image) => {
+         {dataArray.data.map((element) => {
             return (
-               <div key={Math.random * 1000000}>
-                  <h4 className="h4-club-name">Club Name</h4>
+               <div key={element._id}>
+                  <h4 className="h4-club-name">{element.name}</h4>
                   <div>
                      <Image
                         className="carousel-image"
                         draggable={false}
                         style={{ width: "100%", height: "200px" }}
-                        src={image}
+                        src={element.uriPhotos[0]}
                      />
                   </div>
                   <p className="para-club-description">Club Description</p>

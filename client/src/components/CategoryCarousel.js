@@ -2,13 +2,22 @@ import React from "react";
 import Simple from "./Simple";
 
 const CategoryCarousel = ({ dataArray }) => {
-   console.log("dataArray[0]: ", dataArray.data[0].category);
+   const firstCategory =
+      dataArray &&
+      dataArray.data &&
+      dataArray.data[0] &&
+      dataArray.data[0].category;
+
    return (
       <>
-         <h2 className="category-header">{dataArray.data[0].category}</h2>
-         <div className="wrapper-carousel">
-            <Simple dataArray={dataArray} />
-         </div>
+         {firstCategory && (
+            <>
+               <h2 className="category-header">{firstCategory}</h2>
+               <div className="wrapper-carousel">
+                  <Simple dataArray={dataArray} />
+               </div>
+            </>
+         )}
       </>
    );
 };
