@@ -16,3 +16,18 @@
    height: 125px;
    border-radius: 50%;
 } */
+
+/* .carousel-image {
+   height: 200px;
+} */
+
+.h4-club-name {
+   border: 1px solid red;
+   margin: 0;
+   text-align: center;
+}
+
+.para-club-description {
+   border: 1px solid red;
+   margin: 0;
+}
