@@ -35,8 +35,6 @@ const images = [
    "https://images.unsplash.com/photo-1550064824-8f993041ffd3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
 ];
 
-// Because this is an inframe, so the SSR mode doesn't not do well here.
-// It will work on real devices.
 const Simple = ({ deviceType }) => {
    return (
       <Carousel
@@ -46,7 +44,7 @@ const Simple = ({ deviceType }) => {
          itemClass="image-item"
          responsive={responsive}
       >
-         {images.slice(0, 5).map((image) => {
+         {images.map((image) => {
             return (
                <Image
                   className="carousel-image"
