@@ -6,7 +6,7 @@ export const getClubs = async (req, res) => {
       res.status(200).json({
          status: "success",
          results: clubs.length,
-         clubs,
+         data: clubs,
       });
    } catch (error) {
       res.status(404).json({ message: error.message });

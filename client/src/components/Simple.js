@@ -2,6 +2,7 @@ import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import { Image } from "semantic-ui-react";
 import "./Simple.css";
+import { Fragment } from "react";
 
 const responsive = {
    desktop: {
@@ -35,23 +36,24 @@ const images = [
    "https://images.unsplash.com/photo-1550064824-8f993041ffd3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
 ];
 
-const Simple = ({ deviceType }) => {
+const Simple = ({ dataArray }) => {
+   console.log(dataArray);
    return (
-      <Carousel
-         ssr
-         partialVisbile
-         deviceType={deviceType}
-         itemClass="image-item"
-         responsive={responsive}
-      >
+      <Carousel partialVisible itemClass="image-item" responsive={responsive}>
          {images.map((image) => {
             return (
-               <Image
-                  className="carousel-image"
-                  draggable={false}
-                  style={{ width: "100%", height: "100%" }}
-                  src={image}
-               />
+               <div key={Math.random * 1000000}>
+                  <h4 className="h4-club-name">Club Name</h4>
+                  <div>
+                     <Image
+                        className="carousel-image"
+                        draggable={false}
+                        style={{ width: "100%", height: "200px" }}
+                        src={image}
+                     />
+                  </div>
+                  <p className="para-club-description">Club Description</p>
+               </div>
             );
          })}
       </Carousel>
