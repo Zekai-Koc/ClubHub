@@ -1,4 +1,21 @@
-.simple-image {
-   height: 100px;
-   border: 1px solid red;
+/* #__next {
+   padding: 20px;
+}
+.image-item {
+   padding: 20px 0 20px 20px;
+   width: 100px;
+}
+
+.carousel-image {
+   height: 200px;
+} */
+
+.react-multi-carousel-list button {
+   background-color: red;
+   width: 125px;
+   height: 125px;
+   border-radius: 50%;
+   /* position: absolute;
+   top: 110px;
+   z-index: 10; */
 }

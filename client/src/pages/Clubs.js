@@ -1,7 +1,7 @@
 import React from "react";
-import MultiCarousel from "../components/MultiCarousel";
+// import MultiCarousel from "../components/MultiCarousel";
 import Simple from "../components/Simple";
-import "./Clubs.css";
+// import "./Clubs.css";
 
 const Clubs = () => {
    const clubs = fetch("http://localhost:5000/api/v1/clubs")
@@ -14,7 +14,9 @@ const Clubs = () => {
       <div className="App">
          <header className="App-header">
             <h1>clubhub home</h1>
-            <Simple className="simple-carousel" />
+            <div className="wrapper-carousel">
+               <Simple deviceType="desktop" />
+            </div>
          </header>
       </div>
    );

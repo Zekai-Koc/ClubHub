@@ -1,4 +1,5 @@
 import Carousel from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
 import { Image } from "semantic-ui-react";
 import "./Simple.css";
 
@@ -48,7 +49,7 @@ const Simple = ({ deviceType }) => {
          {images.slice(0, 5).map((image) => {
             return (
                <Image
-                  className="simple-image"
+                  className="carousel-image"
                   draggable={false}
                   style={{ width: "100%", height: "100%" }}
                   src={image}
