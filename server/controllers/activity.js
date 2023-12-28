@@ -6,7 +6,7 @@ export const getActivities = async (req, res) => {
       res.status(200).json({
          status: "success",
          results: activities.length,
-         activities,
+         data: activities,
       });
    } catch (error) {
       res.status(404).json({ message: error.message });
