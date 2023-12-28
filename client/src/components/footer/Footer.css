@@ -9,4 +9,6 @@
    border: 1px solid red;
    background-color: cadetblue; /* Optionally, add a background color */
    z-index: 999; /* Optionally adjust z-index to ensure it stays above other elements */
+
+   /* background-image: url("../../assets/clubhub_logo_tp.png"); */
 }

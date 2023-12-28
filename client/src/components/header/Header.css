@@ -7,6 +7,11 @@
    align-items: center;
    justify-content: space-around;
    border: 1px solid red;
-   background-color: bisque; /* Optionally, add a background color */
+   background-color: cadetblue; /* Optionally, add a background color */
    z-index: 999; /* Optionally adjust z-index to ensure it stays above other elements */
+}
+
+.logo-image {
+   width: 150px;
+   /* height: 75px; */
 }
