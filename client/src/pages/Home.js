@@ -1,12 +1,17 @@
 import React from "react";
 import Clubs from "./Clubs";
-import Activities from "./Activities";
+import Header from "../components/header/Header";
+import Footer from "../components/footer/Footer";
 
 const Home = () => {
    return (
       <>
+         <Header />
          <Clubs />
-         {/* <Activities /> */}
+         <br />
+         <br />
+         <br />
+         <Footer />
       </>
    );
 };
