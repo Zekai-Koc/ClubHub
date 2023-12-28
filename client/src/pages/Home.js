@@ -1,13 +1,14 @@
 import React from "react";
 import Clubs from "./Clubs";
 import Header from "../components/header/Header";
+import Footer from "../components/footer/Footer";
 
 const Home = () => {
    return (
       <>
          <Header />
          <Clubs />
-         <h1>FOOTER</h1>
+         <Footer />
       </>
    );
 };
