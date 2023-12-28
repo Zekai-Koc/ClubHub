@@ -8,7 +8,7 @@ const Activities = () => {
       fetch("http://localhost:5000/api/v1/activities")
          .then((response) => response.json())
          .then((data) => {
-            console.log("activities data: ", data);
+            // console.log("activities data: ", data);
             setData(data);
          });
    }, []);

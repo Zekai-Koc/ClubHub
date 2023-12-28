@@ -1,15 +1,20 @@
 import React, { useEffect, useState } from "react";
 import CategoryCarousel from "../components/CategoryCarousel";
+import { classifyData, modifyClassifiedData } from "../utils/string_methods";
 
 const Clubs = () => {
-   const [data, setData] = useState([]);
+   const [clubs, setClubs] = useState([]);
 
    useEffect(() => {
       fetch("http://localhost:5000/api/v1/clubs")
          .then((response) => response.json())
-         .then((data) => {
-            // console.log("clubs data: ", data);
-            setData(data);
+         .then((clubs) => {
+            console.log("clubs data: ", clubs);
+            // setClubs(clubs);
+            const classifiedData = Object.values(classifyData(clubs.data));
+            modifyClassifiedData(classifiedData);
+            console.log("classifiedData: ", classifiedData);
+            setClubs(classifiedData);
          });
    }, []);
 
@@ -18,7 +23,9 @@ const Clubs = () => {
          <h1>clubs</h1>
 
          <div className="wrapper-carousel">
-            <CategoryCarousel dataArray={data} />
+            {clubs.map((data, index) => (
+               <CategoryCarousel key={index} dataArray={data} />
+            ))}
          </div>
       </div>
    );
