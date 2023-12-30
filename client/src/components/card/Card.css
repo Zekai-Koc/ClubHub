@@ -1,5 +1,3 @@
-/* Card.css */
-
 .card-container {
    position: relative;
    overflow: hidden;
@@ -29,18 +27,12 @@
    transform: scale(1.1);
 }
 
-.card {
-   /* Your existing styles for header and description */
-}
-
-/* Example of header style */
 .card-h4-club-name {
    border: 1px solid red;
    margin: 0;
    text-align: center;
 }
 
-/* Example of description style */
 .card-para-club-description {
    border: 1px solid red;
    margin: 0;

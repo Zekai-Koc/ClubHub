@@ -8,6 +8,9 @@ const Home = () => {
       <>
          <Header />
          <Clubs />
+         <br />
+         <br />
+         <br />
          <Footer />
       </>
    );
