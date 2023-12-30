@@ -21,13 +21,25 @@
    height: 200px;
 } */
 
-.h4-club-name {
+/* .h4-club-name {
    border: 1px solid red;
    margin: 0;
    text-align: center;
-}
+} */
 
-.para-club-description {
+/* .para-club-description {
    border: 1px solid red;
    margin: 0;
-}
+   white-space: nowrap;
+   overflow: hidden;
+   text-overflow: ellipsis;
+} */
+
+/* .para-club-description {
+   border: 1px solid red;
+   margin: 0;
+   display: -webkit-box;
+   -webkit-line-clamp: 2;
+   -webkit-box-orient: vertical;
+   overflow: hidden;
+} */
